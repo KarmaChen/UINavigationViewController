@@ -8,7 +8,7 @@
 
 #import "FirstViewController.h"
 #import "SecondViewController.h"
-@interface FirstViewController ()
+@interface FirstViewController ()<UINavigationBarDelegate>
 
 
 @end
@@ -19,15 +19,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor yellowColor];
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"left" style:UIBarButtonItemStylePlain target:self action:@selector(clickLeftBtn)];
+    self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+    
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"1"] style:UIBarButtonItemStylePlain target:self action:@selector(clickRightBtn)];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 100, 30)];
+    titleView.backgroundColor = [UIColor greenColor];
+    self.navigationItem.titleView = titleView;
+    
+    self.navigationController.delegate=self;
+}
+#pragma mark -delegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    NSLog(@"%s",__func__);
+
+}
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+     NSLog(@"%s",__func__);
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"点我" style:UIBarButtonItemStylePlain target:self action:@selector(clickLeftBtn)];
-    self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+    
 }
 -(void) clickLeftBtn{
+    NSLog(@"__func__");
+}
+-(void) clickRightBtn{
     NSLog(@"__func__");
 }
 - (IBAction)changeView:(id)sender {

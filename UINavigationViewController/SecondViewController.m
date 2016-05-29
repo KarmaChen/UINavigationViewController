@@ -8,7 +8,7 @@
 
 #import "SecondViewController.h"
 
-@interface SecondViewController ()
+@interface SecondViewController ()<UINavigationBarDelegate>
 
 @end
 
@@ -19,6 +19,24 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor redColor];
     self.navigationController.navigationBar.barTintColor=[UIColor greenColor];
+    self.navigationItem.title=@"second";
+    self.navigationItem.prompt=@"welcome to my view";
+    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 50)];
+    view.backgroundColor=[UIColor purpleColor];
+    UIBarButtonItem *rightView=[[UIBarButtonItem alloc]initWithCustomView:view];
+    self.navigationItem.rightBarButtonItem=rightView;
+    
+    self.navigationController.delegate=self;
+    
+}
+#pragma mark -delegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    NSLog(@"%s",__func__);
+    
+}
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    NSLog(@"%s",__func__);
+    
 }
 
 - (void)didReceiveMemoryWarning {

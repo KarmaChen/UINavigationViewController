@@ -8,7 +8,7 @@
 
 #import "MyNavigationViewController.h"
 
-@interface MyNavigationViewController ()
+@interface MyNavigationViewController ()<UINavigationBarDelegate>
 
 @end
 
@@ -23,7 +23,18 @@
     
     //给导航栏设置图片
 //    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"3"] forBarMetrics:UIBarMetricsDefault];
+    
+    self.navigationBar.delegate=self;
 }
+#pragma mark --delegate
+- (void)navigationBar:(UINavigationBar *)navigationBar didPushItem:(UINavigationItem *)item{
+    NSLog(@"%s",__func__);
+}
+
+- (void)navigationBar:(UINavigationBar *)navigationBar didPopItem:(UINavigationItem *)item{
+    NSLog(@"%s",__func__);
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
